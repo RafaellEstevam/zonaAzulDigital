@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagamentos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar cartão</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" >
+  
+  <ion-item>
+    <ion-label position="floating">Nome Titular do Cartão <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input  type="text" [(ngModel)]= "nomeTitular" class="text-transform-uppercase"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Número do Cartão <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input  type="text" [(ngModel)]= "numeroCartao"></ion-input>
+  </ion-item>
+
+  <ion-item><!--1º coisa que acontece é o carregamento das bandeiras do cartão-->
+    <ion-label>Bandeira <ion-text color="danger">*</ion-text></ion-label>
+    <ion-select [(ngModel)] ="bandeiraSelecionadaId">
+      <ion-select-option *ngFor="let bandeira of bandeiras" [value]="bandeira.id">{{bandeira.nome}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Validade <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input  type="month" placeholder="Validade" [(ngModel)]= "validade"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Cód. de Segurança (CVV) <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input  type="number" [(ngModel)]= "codSeguranca"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">CPF <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input  type="text" [(ngModel)]= "cpf"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="cadastrarCartao()" class="botao-salvar" size="large" shape ="round" expand="block" color="secondary">
+    Salvar
+  </ion-button>
+
+</ion-content>

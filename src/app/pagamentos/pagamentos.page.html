@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Meios de pagamento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <ion-list >
+    <ion-item class="item-lista" *ngFor="let cartao of cartoesCadastrados">
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-col size="2">
+            <img src= {{cartao.bandeira.urlImagem}}>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-label>
+            <h2>**** **** **** {{cartao.final}}</h2>
+          </ion-label>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button (click)="removerCartao(cartao.id)" fill="clear">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+    </ion-row>
+    </ion-item>
+  </ion-list>
+  
+  <ion-fab horizontal="center" routerLink="/pagamentos/create">
+    <ion-fab-button color="secondary"  class="botao-adicionar ripple-parent ion-activatable">
+      <ion-icon name="add"></ion-icon>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-fab-button>
+  </ion-fab> 
+ 
+
+  
+
+</ion-content>
+
+

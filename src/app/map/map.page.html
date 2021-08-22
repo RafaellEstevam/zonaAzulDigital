@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Estacionar
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]='search' (ionChange)='searchChanged()' placeholder='Onde você está?'></ion-searchbar>
+    <ion-list class='ion-margin-horizontal' [hidden]='hidden'>
+      <ion-item (click)='changeLocation(result)' *ngFor="let result of searchResults">
+        {{result.description}}
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div #map id="map"></div> 
+
+  <ion-row  class="ion-justify-content-center">
+    <ion-col size="6" class="ion-text-center">
+      <div class="cads">
+        <h3> 1 CAD - 1 Hora</h3>
+        <h4>R$ 5,00</h4>
+      </div>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-item>
+    <ion-select [(ngModel)]="cartaoSelecionado" multiple="false" placeholder="Selecione o método de pagamento">
+      <ion-select-option  *ngFor="let cartao of cartoesCadastrados" [value]= "cartao.numero">**** **** **** {{cartao.final}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item>
+    <ion-select [(ngModel)]="placaSelecionada" multiple="false" placeholder="Selecione a placa do veículo">
+      <ion-select-option *ngFor="let veiculo of veiculosCadastrados" [value]= "veiculo.placa">{{veiculo.placa}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+    
+  <ion-button (click)="confirmar()" class="botao-salvar" size="large" shape ="round" expand="block" color="secondary">
+    Confirmar
+  </ion-button>
+
+</ion-content>

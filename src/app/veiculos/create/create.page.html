@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/veiculos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastrar veículo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" >
+  
+  <ion-item>
+    <ion-label position="floating">Placa <ion-text color="danger">*</ion-text></ion-label>
+    <ion-input  type="text" [(ngModel)]= "novoVeiculo.placa" class="text-transform-uppercase"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Cor <ion-text color="danger">*</ion-text></ion-label>
+    <ion-select [(ngModel)] ="novoVeiculo.cor">
+      <ion-select-option value="Azul">Azul</ion-select-option>
+      <ion-select-option value="Amarelo">Amarelo</ion-select-option>
+      <ion-select-option value="Branco">Branco</ion-select-option>
+      <ion-select-option value="Cinza">Cinza</ion-select-option>
+      <ion-select-option value="Marrom">Marrom</ion-select-option>
+      <ion-select-option value="Prata">Prata</ion-select-option>
+      <ion-select-option value="Preto">Preto</ion-select-option>
+      <ion-select-option value="Vermelho">Vermelho</ion-select-option>
+      <ion-select-option value="Verde">Verde</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item><!--a 1ª coisa que acontece aqui é o carregamento das marcas. No ts, recebe o veículos.service como injeção de dependência e puxa a lista de marcas-->
+    <ion-label>Marca <ion-text color="danger">*</ion-text></ion-label>
+    <ion-select [(ngModel)] ="idMarcaSelecionada" (ionChange)="carregarModelos()"> <!--quando seleciona a marca, dá um ion change e chama o método de carregamento dos modelos-->
+      <ion-select-option *ngFor="let marca of marcas" [value]="marca.id">{{marca.nome}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Modelo <ion-text color="danger">*</ion-text></ion-label>
+    <ion-select [(ngModel)] ="idModeloSelecionado" [disabled]="modelosDaMarca.length > 0 ? 'false':'true'">
+      <ion-select-option *ngFor="let modelo of modelosDaMarca" [value]="modelo.id">{{modelo.nome}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-button (click)="cadastrarVeiculo()" class="botao-salvar" size="large" shape ="round" expand="block" color="secondary">
+    Salvar
+  </ion-button>
+</ion-content>
